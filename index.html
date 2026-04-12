@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no, maximum-scale=1.0" />
     <title>Farewell Legends ✨ | 2024</title>
     <link rel="icon" href="heart.svg" />
 
@@ -37,6 +37,7 @@
         font-family: "Space Grotesk", sans-serif;
         overflow-x: hidden;
         line-height: 1.6;
+        -webkit-tap-highlight-color: transparent;
       }
 
       /* ✨ Grainy Overlay */
@@ -53,30 +54,42 @@
         z-index: 9999;
       }
 
-      /* 🖱️ Custom Cursor */
-      #cursor {
-        width: 20px;
-        height: 20px;
-        background: var(--secondary);
-        border-radius: 50%;
-        position: fixed;
-        pointer-events: none;
-        z-index: 10000;
-        mix-blend-mode: difference;
-        transition: transform 0.1s ease;
+      /* 🖱️ Custom Cursor (Hidden on touch) */
+      @media (pointer: fine) {
+        #cursor {
+          width: 20px;
+          height: 20px;
+          background: var(--secondary);
+          border-radius: 50%;
+          position: fixed;
+          pointer-events: none;
+          z-index: 10000;
+          mix-blend-mode: difference;
+          transition: transform 0.1s ease;
+        }
+
+        #cursor-trail {
+          width: 40px;
+          height: 40px;
+          border: 2px solid var(--primary);
+          border-radius: 50%;
+          position: fixed;
+          pointer-events: none;
+          z-index: 9999;
+          transition:
+            transform 0.15s ease,
+            opacity 0.3s;
+        }
       }
 
-      #cursor-trail {
-        width: 40px;
-        height: 40px;
-        border: 2px solid var(--primary);
-        border-radius: 50%;
-        position: fixed;
-        pointer-events: none;
-        z-index: 9999;
-        transition:
-          transform 0.15s ease,
-          opacity 0.3s;
+      @media (pointer: coarse) {
+        #cursor,
+        #cursor-trail {
+          display: none;
+        }
+        * {
+          cursor: auto !important;
+        }
       }
 
       /* 🌈 Background Blobs */
@@ -134,11 +147,12 @@
 
       .hero h1 {
         font-family: "Syne", sans-serif;
-        font-size: clamp(3rem, 10vw, 8rem);
-        line-height: 0.9;
+        font-size: clamp(3.5rem, 15vw, 8rem);
+        line-height: 0.85;
         text-transform: uppercase;
         margin-bottom: 2rem;
         position: relative;
+        padding: 0 10px;
       }
 
       .hero h1 span {
@@ -161,20 +175,21 @@
 
       .hero-sticker {
         position: absolute;
-        width: 150px;
+        width: clamp(60px, 15vw, 150px);
         pointer-events: none;
         z-index: 10;
+        opacity: 0.6;
       }
 
       .sticker-heart {
         top: 20%;
-        right: 10%;
+        right: 2%;
         transform: rotate(15deg);
         animation: bounce 3s infinite;
       }
       .sticker-star {
         bottom: 20%;
-        left: 10%;
+        left: 2%;
         transform: rotate(-15deg);
         animation: bounce 4s infinite reverse;
       }
@@ -299,15 +314,33 @@
       }
 
       @media (max-width: 600px) {
+        .container {
+          padding: 0 1.5rem;
+        }
         .bento-grid {
           grid-template-columns: 1fr;
+          grid-auto-rows: auto;
+          min-height: 300px;
+        }
+        .bento-item {
+          min-height: 250px;
         }
         .bento-item.large,
-        .bento-item.wide {
+        .bento-item.wide,
+        .bento-item.tall {
           grid-column: span 1;
+          grid-row: span 1;
         }
         .hero h1 {
-          font-size: 4rem;
+          font-size: clamp(3.5rem, 18vw, 5rem);
+        }
+        .hero .tag {
+          font-size: 0.8rem;
+          padding: 0.4rem 1rem;
+        }
+        .btn-main {
+          padding: 1.2rem 2.5rem;
+          font-size: 1.2rem;
         }
       }
     </style>
