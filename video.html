@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gasolinnaaaa</title>
+  <link rel="icon" href="heart.svg" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: black;
+      overflow: hidden;
+      height: 100vh;
+      height: 100dvh; /* IMPORTANT for mobile */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      max-width: 500px; /* keeps portrait feel on desktop */
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Controls */
+    .controls {
+      position: absolute;
+      bottom: calc(20px + env(safe-area-inset-bottom));
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 18px;
+      background: rgba(0,0,0,0.45);
+      padding: 10px 14px;
+      border-radius: 999px;
+      backdrop-filter: blur(10px);
+    }
+
+    button {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* RESPONSIVE ICON SIZE */
+    button svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    /* Small phones */
+    @media (max-width: 480px) {
+      button svg {
+        width: 22px;
+        height: 22px;
+      }
+
+      .controls {
+        gap: 14px;
+        padding: 8px 12px;
+      }
+    }
+
+    /* Large screens */
+    @media (min-width: 768px) {
+      button svg {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  </style>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+  <div class="container">
+
+    <video id="video" src="farewell.mp4" loop muted playsinline></video>
+
+    <div class="controls">
+
+      <button onclick="togglePlay()">
+        <span id="playIcon" data-lucide="play"></span>
+      </button>
+
+      <button onclick="toggleMute()">
+        <span id="muteIcon" data-lucide="volume-x"></span>
+      </button>
+
+    </div>
+
+  </div>
+
+  <script>
+    const video = document.getElementById("video");
+
+    lucide.createIcons();
+
+    function togglePlay() {
+      const playIcon = document.getElementById("playIcon");
+
+      if (video.paused) {
+        video.play();
+        playIcon.setAttribute("data-lucide", "pause");
+      } else {
+        video.pause();
+        playIcon.setAttribute("data-lucide", "play");
+      }
+
+      lucide.createIcons();
+    }
+
+    function toggleMute() {
+      const muteIcon = document.getElementById("muteIcon");
+
+      video.muted = !video.muted;
+
+      muteIcon.setAttribute(
+        "data-lucide",
+        video.muted ? "volume-x" : "volume-2"
+      );
+
+      lucide.createIcons();
+    }
+  </script>
+
+</body>
+</html>
