@@ -1,515 +1,643 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no, maximum-scale=1.0" />
-    <title>Farewell Legends ✨ | 2024</title>
-    <link rel="icon" href="heart.svg" />
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syne:wght@700;800&display=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no, maximum-scale=1.0" />
+  <title>Farewell Legends ✨ | 2024</title>
+  <link rel="icon" href="heart.svg" />
 
-    <style>
-      :root {
-        --primary: #9b72cf; /* Lavender */
-        --secondary: #fbef4b; /* Gold/Yellow */
-        --accent: #f7e15e; /* Bright Gold */
-        --bg: #1a0a33; /* Deep Purple */
-        --glass: rgba(255, 255, 255, 0.05);
-        --glass-border: rgba(255, 255, 255, 0.1);
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syne:wght@700;800&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    :root {
+      --primary: #9b72cf;
+      /* Lavender */
+      --secondary: #fbef4b;
+      /* Gold/Yellow */
+      --accent: #f7e15e;
+      /* Bright Gold */
+      --bg: #1a0a33;
+      /* Deep Purple */
+      --glass: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      cursor: none;
+      /* We'll implement a custom cursor */
+    }
+
+    body {
+      background-color: var(--bg);
+      color: #fff;
+      font-family: "Space Grotesk", sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* ✨ Grainy Overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+      opacity: 0.15;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* 🖱️ Custom Cursor (Hidden on touch) */
+    @media (pointer: fine) {
+      #cursor {
+        width: 20px;
+        height: 20px;
+        background: var(--secondary);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 10000;
+        mix-blend-mode: difference;
+        transition: transform 0.1s ease;
+      }
+
+      #cursor-trail {
+        width: 40px;
+        height: 40px;
+        border: 2px solid var(--primary);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        transition:
+          transform 0.15s ease,
+          opacity 0.3s;
+      }
+    }
+
+    @media (pointer: coarse) {
+
+      #cursor,
+      #cursor-trail {
+        display: none;
       }
 
       * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        cursor: none; /* We'll implement a custom cursor */
+        cursor: auto !important;
+      }
+    }
+
+    /* ✨ Marquee Effect */
+    .marquee-wrapper {
+      position: absolute;
+      width: 110vw;
+      left: -5vw;
+      overflow: hidden;
+      z-index: 1;
+      pointer-events: none;
+      white-space: nowrap;
+      padding: 0.5rem 0;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .marquee-wrapper.top {
+      top: 8%;
+      transform: rotate(-3deg);
+      background: var(--primary);
+    }
+
+    .marquee-wrapper.bottom {
+      bottom: 8%;
+      transform: rotate(3deg);
+      background: var(--secondary);
+    }
+
+    .marquee-content {
+      display: inline-block;
+      animation: marquee 80s linear infinite;
+      font-family: "Syne", sans-serif;
+      font-size: 5rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+
+    .marquee-wrapper.bottom .marquee-content {
+      animation-direction: reverse;
+    }
+
+    .marquee-wrapper.top .marquee-item {
+      color: #fff;
+      vertical-align: middle;
+    }
+
+    .marquee-wrapper.top .marquee-star {
+      color: var(--secondary);
+      font-size: 3rem;
+      margin: 0 2rem;
+      vertical-align: middle;
+      opacity: 1;
+    }
+
+    .marquee-wrapper.bottom .marquee-item {
+      color: var(--bg);
+      vertical-align: middle;
+    }
+
+    .marquee-wrapper.bottom .marquee-star {
+      color: var(--primary);
+      font-size: 3rem;
+      margin: 0 2rem;
+      vertical-align: middle;
+      opacity: 1;
+    }
+
+    @keyframes marquee {
+      0% {
+        transform: translateX(0);
       }
 
-      body {
-        background-color: var(--bg);
-        color: #fff;
-        font-family: "Space Grotesk", sans-serif;
-        overflow-x: hidden;
-        line-height: 1.6;
-        -webkit-tap-highlight-color: transparent;
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* 🌈 Background Blobs */
+    .blob {
+      position: absolute;
+      filter: blur(80px);
+      z-index: -1;
+      opacity: 0.5;
+      animation: float 20s infinite alternate;
+    }
+
+    .blob-1 {
+      width: 400px;
+      height: 400px;
+      background: #4a1d8c;
+      top: -100px;
+      left: -100px;
+    }
+
+    .blob-2 {
+      width: 300px;
+      height: 300px;
+      background: var(--primary);
+      bottom: 20%;
+      right: -50px;
+      animation-delay: -5s;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translate(0, 0) scale(1);
       }
 
-      /* ✨ Grainy Overlay */
-      body::before {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-        opacity: 0.15;
-        pointer-events: none;
-        z-index: 9999;
+      100% {
+        transform: translate(100px, 50px) scale(1.2);
+      }
+    }
+
+    /* 🏢 Layout Containers */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* 🚀 Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-family: "Syne", sans-serif;
+      font-size: clamp(3.5rem, 15vw, 8rem);
+      line-height: 0.85;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      position: relative;
+      padding: 0 10px;
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+      display: block;
+      font-size: 0.4em;
+      letter-spacing: 15px;
+      margin-bottom: 10px;
+    }
+
+    .hero .tag {
+      background: var(--glass);
+      padding: 0.5rem 1.5rem;
+      border-radius: 999px;
+      border: 1px solid var(--glass-border);
+      font-weight: 500;
+      backdrop-filter: blur(10px);
+      margin-bottom: 2rem;
+    }
+
+    .hero-sticker {
+      position: absolute;
+      width: clamp(60px, 15vw, 150px);
+      pointer-events: none;
+      z-index: 10;
+      opacity: 0.6;
+    }
+
+    .sticker-heart {
+      top: 20%;
+      right: 2%;
+      transform: rotate(15deg);
+      animation: bounce 3s infinite;
+    }
+
+    .sticker-star {
+      bottom: 20%;
+      left: 2%;
+      transform: rotate(-15deg);
+      animation: bounce 4s infinite reverse;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(15deg);
       }
 
-      /* 🖱️ Custom Cursor (Hidden on touch) */
-      @media (pointer: fine) {
-        #cursor {
-          width: 20px;
-          height: 20px;
-          background: var(--secondary);
-          border-radius: 50%;
-          position: fixed;
-          pointer-events: none;
-          z-index: 10000;
-          mix-blend-mode: difference;
-          transition: transform 0.1s ease;
-        }
-
-        #cursor-trail {
-          width: 40px;
-          height: 40px;
-          border: 2px solid var(--primary);
-          border-radius: 50%;
-          position: fixed;
-          pointer-events: none;
-          z-index: 9999;
-          transition:
-            transform 0.15s ease,
-            opacity 0.3s;
-        }
+      50% {
+        transform: translateY(-20px) rotate(10deg);
       }
+    }
 
-      @media (pointer: coarse) {
-        #cursor,
-        #cursor-trail {
-          display: none;
-        }
-        * {
-          cursor: auto !important;
-        }
+    /* 📸 Bento Grid */
+    .grid-section {
+      padding: 100px 0;
+    }
+
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 200px;
+      gap: 1.5rem;
+    }
+
+    .bento-item {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 2rem;
+      overflow: hidden;
+      position: relative;
+      backdrop-filter: blur(10px);
+      transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .bento-item:hover {
+      transform: translateY(-10px) scale(1.02);
+      border-color: var(--secondary);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .bento-item.large {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    .bento-item.tall {
+      grid-row: span 2;
+    }
+
+    .bento-item.wide {
+      grid-column: span 2;
+    }
+
+    .bento-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.8;
+      transition: scale 0.5s;
+    }
+
+    .bento-item:hover img {
+      scale: 1.1;
+      opacity: 1;
+    }
+
+    .bento-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 2rem;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    }
+
+    .bento-item h3 {
+      font-family: "Syne", sans-serif;
+      font-size: 1.5rem;
+    }
+
+    .bento-item p {
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    /* 🎯 CTA Section */
+    .cta {
+      height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .btn-main {
+      padding: 1.5rem 4rem;
+      font-size: 1.5rem;
+      font-family: "Syne", sans-serif;
+      background: #fff;
+      color: #000;
+      border: none;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 800;
+      position: relative;
+      overflow: hidden;
+      transition: 0.3s;
+    }
+
+    .btn-main:hover {
+      transform: scale(1.1);
+      background: var(--secondary);
+      box-shadow: 0 0 30px var(--secondary);
+    }
+
+    /* 📱 Responsive */
+    @media (max-width: 992px) {
+      .bento-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
+    }
 
-      /* 🌈 Background Blobs */
-      .blob {
-        position: absolute;
-        filter: blur(80px);
-        z-index: -1;
-        opacity: 0.5;
-        animation: float 20s infinite alternate;
-      }
-
-      .blob-1 {
-        width: 400px;
-        height: 400px;
-        background: #4a1d8c;
-        top: -100px;
-        left: -100px;
-      }
-
-      .blob-2 {
-        width: 300px;
-        height: 300px;
-        background: var(--primary);
-        bottom: 20%;
-        right: -50px;
-        animation-delay: -5s;
-      }
-
-      @keyframes float {
-        0% {
-          transform: translate(0, 0) scale(1);
-        }
-        100% {
-          transform: translate(100px, 50px) scale(1.2);
-        }
-      }
-
-      /* 🏢 Layout Containers */
+    @media (max-width: 600px) {
       .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 2rem;
-      }
-
-      /* 🚀 Hero Section */
-      .hero {
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        position: relative;
-      }
-
-      .hero h1 {
-        font-family: "Syne", sans-serif;
-        font-size: clamp(3.5rem, 15vw, 8rem);
-        line-height: 0.85;
-        text-transform: uppercase;
-        margin-bottom: 2rem;
-        position: relative;
-        padding: 0 10px;
-      }
-
-      .hero h1 span {
-        color: var(--primary);
-        display: block;
-        font-size: 0.4em;
-        letter-spacing: 15px;
-        margin-bottom: 10px;
-      }
-
-      .hero .tag {
-        background: var(--glass);
-        padding: 0.5rem 1.5rem;
-        border-radius: 999px;
-        border: 1px solid var(--glass-border);
-        font-weight: 500;
-        backdrop-filter: blur(10px);
-        margin-bottom: 2rem;
-      }
-
-      .hero-sticker {
-        position: absolute;
-        width: clamp(60px, 15vw, 150px);
-        pointer-events: none;
-        z-index: 10;
-        opacity: 0.6;
-      }
-
-      .sticker-heart {
-        top: 20%;
-        right: 2%;
-        transform: rotate(15deg);
-        animation: bounce 3s infinite;
-      }
-      .sticker-star {
-        bottom: 20%;
-        left: 2%;
-        transform: rotate(-15deg);
-        animation: bounce 4s infinite reverse;
-      }
-
-      @keyframes bounce {
-        0%,
-        100% {
-          transform: translateY(0) rotate(15deg);
-        }
-        50% {
-          transform: translateY(-20px) rotate(10deg);
-        }
-      }
-
-      /* 📸 Bento Grid */
-      .grid-section {
-        padding: 100px 0;
+        padding: 0 1.5rem;
       }
 
       .bento-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-auto-rows: 200px;
-        gap: 1.5rem;
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+        min-height: 300px;
       }
 
       .bento-item {
-        background: var(--glass);
-        border: 1px solid var(--glass-border);
-        border-radius: 2rem;
-        overflow: hidden;
-        position: relative;
-        backdrop-filter: blur(10px);
-        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        min-height: 250px;
       }
 
-      .bento-item:hover {
-        transform: translateY(-10px) scale(1.02);
-        border-color: var(--secondary);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-      }
-
-      .bento-item.large {
-        grid-column: span 2;
-        grid-row: span 2;
-      }
+      .bento-item.large,
+      .bento-item.wide,
       .bento-item.tall {
-        grid-row: span 2;
-      }
-      .bento-item.wide {
-        grid-column: span 2;
+        grid-column: span 1;
+        grid-row: span 1;
       }
 
-      .bento-item img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        opacity: 0.8;
-        transition: scale 0.5s;
+      .hero h1 {
+        font-size: clamp(3.5rem, 18vw, 5rem);
       }
 
-      .bento-item:hover img {
-        scale: 1.1;
-        opacity: 1;
-      }
-
-      .bento-content {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        padding: 2rem;
-        background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-      }
-
-      .bento-item h3 {
-        font-family: "Syne", sans-serif;
-        font-size: 1.5rem;
-      }
-
-      .bento-item p {
-        font-size: 0.9rem;
-        opacity: 0.7;
-      }
-
-      /* 🎯 CTA Section */
-      .cta {
-        height: 60vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
+      .hero .tag {
+        font-size: 0.8rem;
+        padding: 0.4rem 1rem;
       }
 
       .btn-main {
-        padding: 1.5rem 4rem;
-        font-size: 1.5rem;
-        font-family: "Syne", sans-serif;
-        background: #fff;
-        color: #000;
-        border: none;
-        border-radius: 999px;
-        text-decoration: none;
-        font-weight: 800;
-        position: relative;
-        overflow: hidden;
-        transition: 0.3s;
+        padding: 1.2rem 2.5rem;
+        font-size: 1.2rem;
       }
 
-      .btn-main:hover {
-        transform: scale(1.1);
-        background: var(--secondary);
-        box-shadow: 0 0 30px var(--secondary);
+      /* Responsive Marquee */
+      .marquee-content {
+        font-size: 2.5rem;
+        letter-spacing: -1px;
       }
 
-      /* 📱 Responsive */
-      @media (max-width: 992px) {
-        .bento-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
+      .marquee-wrapper.top .marquee-star,
+      .marquee-wrapper.bottom .marquee-star {
+        font-size: 1.8rem;
+        margin: 0 1rem;
       }
 
-      @media (max-width: 600px) {
-        .container {
-          padding: 0 1.5rem;
-        }
-        .bento-grid {
-          grid-template-columns: 1fr;
-          grid-auto-rows: auto;
-          min-height: 300px;
-        }
-        .bento-item {
-          min-height: 250px;
-        }
-        .bento-item.large,
-        .bento-item.wide,
-        .bento-item.tall {
-          grid-column: span 1;
-          grid-row: span 1;
-        }
-        .hero h1 {
-          font-size: clamp(3.5rem, 18vw, 5rem);
-        }
-        .hero .tag {
-          font-size: 0.8rem;
-          padding: 0.4rem 1rem;
-        }
-        .btn-main {
-          padding: 1.2rem 2.5rem;
-          font-size: 1.2rem;
-        }
+      .marquee-wrapper.top {
+        top: 3%;
       }
-    </style>
-  </head>
-  <body>
-    <div id="cursor"></div>
-    <div id="cursor-trail"></div>
 
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
+      .marquee-wrapper.bottom {
+        bottom: 3%;
+      }
+    }
+  </style>
+</head>
 
-    <section class="hero">
-      <div class="tag">FAREWELL 2026</div>
-      <h1><span>FOR THE</span>LEGENDS<br />NEVER FADE</h1>
-      <p style="max-width: 600px; margin-top: 1rem; opacity: 0.6">
-        A digital sanctuary for the memories we made, the laughs we shared, and
-        the legacy you leave behind.
-      </p>
+<body>
+  <div id="cursor"></div>
+  <div id="cursor-trail"></div>
 
-      <div style="margin-top: 4rem">
-        <svg
-          width="30"
-          height="50"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="white"
-          stroke-width="1"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          style="animation: bounce 2s infinite"
-        >
-          <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
-        </svg>
-      </div>
-    </section>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
 
-    <div class="container grid-section">
-      <h2
-        style="
+  <section class="hero">
+    <div class="marquee-wrapper top">
+      <div class="marquee-content"></div>
+    </div>
+
+    <div class="tag" style="position: relative; z-index: 2;">FAREWELL 2026</div>
+    <h1 style="position: relative; z-index: 2;"><span>FOR THE</span>GOATS<br /></h1>
+    <p style="max-width: 600px; margin-top: 1rem; opacity: 0.6; position: relative; z-index: 2;">
+      A digital sanctuary for the memories we made, the laughs we shared, and
+      the legacy you leave behind.
+    </p>
+
+    <div class="marquee-wrapper bottom">
+      <div class="marquee-content"></div>
+    </div>
+  </section>
+
+  <div class="container grid-section">
+    <h2 style="
           font-family: &quot;Syne&quot;;
           font-size: 3rem;
           margin-bottom: 3rem;
-        "
-      >
-        THE SQUAD ✨
-      </h2>
-      <div class="bento-grid">
-        <div class="bento-item large">
-          <img src="image.png" alt="Memory 1" />
-          <div class="bento-content">
-            <h3>Day One Vibe</h3>
-            <p>Where it all started. Pure chaos.</p>
-          </div>
+        ">
+      THE SQUAD ✨
+    </h2>
+    <div class="bento-grid">
+      <div class="bento-item large">
+        <img src="image.png" alt="Memory 1" />
+        <div class="bento-content">
+          <h3>Day One Vibe</h3>
+          <p>Where it all started. Pure chaos.</p>
         </div>
-        <div class="bento-item tall">
-          <img src="image.png" alt="Memory 2" />
-          <div class="bento-content">
-            <h3>The Grind</h3>
-            <p>Late night sessions.</p>
-          </div>
+      </div>
+      <div class="bento-item tall">
+        <img src="image.png" alt="Memory 2" />
+        <div class="bento-content">
+          <h3>The Grind</h3>
+          <p>Late night sessions.</p>
         </div>
-        <div class="bento-item">
-          <div
-            style="
+      </div>
+      <div class="bento-item">
+        <div style="
               padding: 2rem;
               height: 100%;
               display: flex;
               flex-direction: column;
               justify-content: center;
               background: var(--primary);
-            "
-          >
-            <h3 style="font-size: 2.5rem">99%</h3>
-            <p>More drama than Netflix.</p>
-          </div>
+            ">
+          <h3 style="font-size: 2.5rem">99%</h3>
+          <p>More drama than Netflix.</p>
         </div>
-        <div
-          class="bento-item wide"
-          style="background: var(--secondary); color: #000"
-        >
-          <div
-            style="
+      </div>
+      <div class="bento-item wide" style="background: var(--secondary); color: #000">
+        <div style="
               padding: 2rem;
               display: flex;
               align-items: center;
               gap: 1rem;
               height: 100%;
-            "
-          >
-            <span style="font-size: 4rem">🎓</span>
-            <div>
-              <h3 style="color: #000">CLASS OF 2026</h3>
-              <p style="color: #000; opacity: 1">Built Different.</p>
-            </div>
+            ">
+          <span style="font-size: 4rem">🎓</span>
+          <div>
+            <h3 style="color: #000">CLASS OF 2026</h3>
+            <p style="color: #000; opacity: 1">Built Different.</p>
           </div>
         </div>
-        <div class="bento-item">
-          <img src="image.png" alt="Memory 3" />
-        </div>
-        <div class="bento-item">
-          <div
-            style="
+      </div>
+      <div class="bento-item">
+        <img src="image.png" alt="Memory 3" />
+      </div>
+      <div class="bento-item">
+        <div style="
               padding: 2rem;
               height: 100%;
               display: flex;
               align-items: center;
               justify-content: center;
               text-align: center;
-            "
-          >
-            <p>"Stay cool, stay legendary."</p>
-          </div>
+            ">
+          <p>"Stay cool, stay legendary."</p>
         </div>
       </div>
     </div>
+  </div>
 
-    <section class="cta">
-      <h2
-        style="
+  <section class="cta">
+    <h2 style="
           font-family: &quot;Syne&quot;;
           font-size: 4rem;
           margin-bottom: 2rem;
-        "
-      >
-        READY TO CRY? 🥹
-      </h2>
-      <a href="video.html" class="btn-main">VISUALIZE MEMORIES</a>
-    </section>
+        ">
+      READY TO CRY? 🥹
+    </h2>
+    <a href="video.html" class="btn-main">VISUALIZE MEMORIES</a>
+  </section>
 
-    <script>
-      // 🖱️ Custom Cursor Logic
-      const cursor = document.getElementById("cursor");
-      const trail = document.getElementById("cursor-trail");
+  <script>
+    // 🎓 Add your seniors' names here!
+    const seniorNames = [
+      "Navin",
+      "Bhuvi",
+      "Amrith",
+      "Maha",
+      "Dharanesh",
+      "Siva",
+      "Hari",
+      "Thanish",
+      "Nisita",
+      "Elakiya",
+      "Praveen",
+      "Pardhu",
+      "Vidhan",
+      "Ashish",
+      "Ritikha",
+      "Sindhura"
+    ];
 
-      document.addEventListener("mousemove", (e) => {
-        cursor.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px)`;
+    // Auto-generate seamless marquee content
+    function initMarquees() {
+      const namesHtml = seniorNames.map(name => `<span class="marquee-item">${name}</span><span class="marquee-star">✦</span>`).join("");
+      const repeatedHtml = namesHtml.repeat(2); // Lower repetition to severely slow down absolute speed
 
-        // Trail with slight delay
-        setTimeout(() => {
-          trail.style.transform = `translate(${e.clientX - 20}px, ${e.clientY - 20}px)`;
-        }, 50);
+      document.querySelectorAll('.marquee-content').forEach(el => {
+        // CSS animation translates from 0 to -50%, requiring two identical halves for a perfect seamless loop
+        el.innerHTML = repeatedHtml + repeatedHtml;
       });
+    }
+    initMarquees();
 
-      // Interactive hover for buttons
-      const interactables = document.querySelectorAll(".bento-item, .btn-main");
-      interactables.forEach((el) => {
-        el.addEventListener("mouseenter", () => {
-          cursor.style.transform += " scale(2.5)";
-          trail.style.opacity = "0";
-        });
-        el.addEventListener("mouseleave", () => {
-          cursor.style.transform = cursor.style.transform.replace(
-            " scale(2.5)",
-            "",
-          );
-          trail.style.opacity = "1";
-        });
+    // 🖱️ Custom Cursor Logic
+    const cursor = document.getElementById("cursor");
+    const trail = document.getElementById("cursor-trail");
+
+    document.addEventListener("mousemove", (e) => {
+      cursor.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px)`;
+
+      // Trail with slight delay
+      setTimeout(() => {
+        trail.style.transform = `translate(${e.clientX - 20}px, ${e.clientY - 20}px)`;
+      }, 50);
+    });
+
+    // Interactive hover for buttons
+    const interactables = document.querySelectorAll(".bento-item, .btn-main");
+    interactables.forEach((el) => {
+      el.addEventListener("mouseenter", () => {
+        cursor.style.transform += " scale(2.5)";
+        trail.style.opacity = "0";
       });
-
-      // Parallax stickers
-      document.addEventListener("mousemove", (e) => {
-        const stickers = document.querySelectorAll(".hero-sticker");
-        const x = (window.innerWidth - e.pageX * 2) / 100;
-        const y = (window.innerHeight - e.pageY * 2) / 100;
-
-        stickers.forEach((s) => {
-          s.style.transform += ` translate(${x}px, ${y}px)`;
-        });
+      el.addEventListener("mouseleave", () => {
+        cursor.style.transform = cursor.style.transform.replace(
+          " scale(2.5)",
+          "",
+        );
+        trail.style.opacity = "1";
       });
-    </script>
-  </body>
+    });
+
+    // Parallax stickers
+    document.addEventListener("mousemove", (e) => {
+      const stickers = document.querySelectorAll(".hero-sticker");
+      const x = (window.innerWidth - e.pageX * 2) / 100;
+      const y = (window.innerHeight - e.pageY * 2) / 100;
+
+      stickers.forEach((s) => {
+        s.style.transform += ` translate(${x}px, ${y}px)`;
+      });
+    });
+  </script>
+</body>
+
 </html>
