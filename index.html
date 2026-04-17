@@ -113,13 +113,27 @@
     }
 
     .marquee-wrapper.top {
-      top: 8%;
+      top: 10%;
       transform: rotate(-3deg);
       background: var(--primary);
     }
 
+    @media (max-width: 600px) {
+      .marquee-wrapper.bottom {
+        bottom: 30%;
+        transform: rotate(3deg);
+        background: var(--secondary);
+      }
+
+      .marquee-wrapper.top {
+        top: 30%;
+        transform: rotate(-3deg);
+        background: var(--primary);
+      }
+    }
+
     .marquee-wrapper.bottom {
-      bottom: 8%;
+      bottom: 10%;
       transform: rotate(3deg);
       background: var(--secondary);
     }
@@ -218,7 +232,7 @@
       padding: 0 2rem;
     }
 
-    /* 🚀 Hero Section */
+    /* Hero Section */
     .hero {
       height: 100vh;
       display: flex;
@@ -451,11 +465,11 @@
       }
 
       .marquee-wrapper.top {
-        top: 3%;
+        top: 10%;
       }
 
       .marquee-wrapper.bottom {
-        bottom: 3%;
+        bottom: 10%;
       }
     }
   </style>
